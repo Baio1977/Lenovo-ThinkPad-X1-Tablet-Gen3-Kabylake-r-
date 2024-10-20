@@ -48,7 +48,7 @@ jobs:
 
     - name: Copy Kexts to EFI/OC/Kexts
       run: |
-        KEXT_SOURCE="./1.0.2/EFI/OC/" # Adjust this as necessary
+        KEXT_SOURCE="./OC/" # Adjust this as necessary
         KEXT_TARGET="./EFI/OC/Kexts"
         mkdir -p "$KEXT_TARGET"
         if [ -d "$KEXT_SOURCE" ]; then
@@ -62,7 +62,7 @@ jobs:
     - name: Copy Config.plist to EFI/OC
       run: |
         echo "Copying Config.plist to EFI/OC..."
-        cp ./1.0.2/OC/Config.plist ./EFI/OC/
+        cp ./OC/Config.plist ./EFI/OC/
 
     - name: Remove all files in EFI/OC/Tools
       run: |
@@ -83,12 +83,12 @@ jobs:
     - name: Copy HfsPlus.efi to EFI/OC/Drivers
       run: |
         echo "Copying HfsPlus.efi to EFI/OC/Drivers..."
-        cp ./1.0.2/OC/Drivers/HfsPlus.efi ./EFI/OC/Drivers/
+        cp ./OC/Drivers/HfsPlus.efi ./EFI/OC/Drivers/
 
     - name: Copy SSDT-Thinkpad_X1Tablet_3Gen.aml to EFI/OC/ACPI
       run: |
         echo "Copying SSDT-Thinkpad_X1Tablet_3Gen.aml to EFI/OC/ACPI..."
-        cp ./1.0.2/OC/ACPI/SSDT-Thinkpad_X1Tablet_3Gen.aml ./EFI/OC/ACPI/
+        cp ./OC/ACPI/SSDT-Thinkpad_X1Tablet_3Gen.aml ./EFI/OC/ACPI/
 
     - name: Clean up
       run: |
