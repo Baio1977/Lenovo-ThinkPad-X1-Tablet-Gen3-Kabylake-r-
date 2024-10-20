@@ -109,7 +109,7 @@ jobs:
     - name: Zip the EFI directory
       run: |
         echo "Zipping the EFI directory..."
-        zip -r EFI.zip EFI
+        zip -r Thinkpad_X1Tablet_3Gen.zip EFI
 
     - name: Upload EFI artifact
       uses: actions/upload-artifact@v4.4.3
