@@ -48,7 +48,7 @@ jobs:
 
     - name: Copy Kexts to EFI/OC/Kexts
       run: |
-        KEXT_SOURCE="./1.0.2/OC/Kexts"  # Adjust this as necessary
+        KEXT_SOURCE="./1.0.2/EFI/OC/" # Adjust this as necessary
         KEXT_TARGET="./EFI/OC/Kexts"
         mkdir -p "$KEXT_TARGET"
         if [ -d "$KEXT_SOURCE" ]; then
