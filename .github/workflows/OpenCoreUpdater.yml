@@ -58,11 +58,6 @@ jobs:
           echo "Error: Kext folder not found."
           exit 1
         fi
-    
-    - name: Copy Resources to EFI/OC
-      run: |
-        echo "Copying Resources to EFI/OC..."
-        cp -r ./1.0.2/OC/Resources ./EFI/OC/
         
     - name: Copy Config.plist to EFI/OC
       run: |
