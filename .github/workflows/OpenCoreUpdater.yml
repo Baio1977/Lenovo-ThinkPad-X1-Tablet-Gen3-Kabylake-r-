@@ -90,7 +90,7 @@ jobs:
         echo "Copying HfsPlus.efi to EFI/OC/Drivers..."
         cp ./1.0.2/OC/Drivers/HfsPlus.efi ./EFI/OC/Drivers/
 
-    - name: Copy SSDT-HP_da1023nia.aml to EFI/OC/ACPI
+    - name: Copy SSDT-Thinkpad_X1Tablet_3Gen.aml to EFI/OC/ACPI
       run: |
         echo "Copying SSDT-Thinkpad_X1Tablet_3Gen.aml to EFI/OC/ACPI..."
         cp ./1.0.2/OC/ACPI/SSDT-Thinkpad_X1Tablet_3Gen.aml ./EFI/OC/ACPI/
