@@ -7,10 +7,8 @@ on:
   workflow_dispatch:
     
 jobs:
-   permissions:
-    contents: write
-   download_opencore:
-    runs-on: ubuntu-latest
+  download_opencore:
+    runs-on: macos-latest
 
     steps:
     - name: Checkout repository
