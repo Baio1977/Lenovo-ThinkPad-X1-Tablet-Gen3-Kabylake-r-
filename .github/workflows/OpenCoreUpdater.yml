@@ -6,15 +6,12 @@ on:
       - main  # Change this to your default branch
   workflow_dispatch:
     
-jobs: 
-  build:
-    name: Build
-    runs-on: macos-latest
-    permissions:
-      contents: write
-  download_opencore:
-    runs-on: macos-latest
-    
+jobs:
+   permissions:
+    contents: write
+   download_opencore:
+    runs-on: ubuntu-latest
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4.2.1
@@ -53,7 +50,7 @@ jobs:
 
     - name: Copy Kexts to EFI/OC/Kexts
       run: |
-        KEXT_SOURCE="./OC/" # Adjust this as necessary
+        KEXT_SOURCE="./OC/Kexts"  # Adjust this as necessary
         KEXT_TARGET="./EFI/OC/Kexts"
         mkdir -p "$KEXT_TARGET"
         if [ -d "$KEXT_SOURCE" ]; then
@@ -63,6 +60,11 @@ jobs:
           echo "Error: Kext folder not found."
           exit 1
         fi
+    
+    - name: Copy Resources to EFI/OC
+      run: |
+        echo "Copying Resources to EFI/OC..."
+        cp -r ./OC/Resources ./EFI/OC/
         
     - name: Copy Config.plist to EFI/OC
       run: |
@@ -90,10 +92,10 @@ jobs:
         echo "Copying HfsPlus.efi to EFI/OC/Drivers..."
         cp ./OC/Drivers/HfsPlus.efi ./EFI/OC/Drivers/
 
-    - name: Copy SSDT-Thinkpad_X1Tablet_3Gen.aml to EFI/OC/ACPI
+    - name: Copy SSDT-HP_da1023nia.aml to EFI/OC/ACPI
       run: |
-        echo "Copying SSDT-Thinkpad_X1Tablet_3Gen.aml to EFI/OC/ACPI..."
-        cp ./OC/ACPI/SSDT-Thinkpad_X1Tablet_3Gen.aml ./EFI/OC/ACPI/
+        echo "Copying SSDT-HP_da1023nia.aml to EFI/OC/ACPI..."
+        cp ./OC/ACPI/SSDT-HP_da1023nia.aml ./EFI/OC/ACPI/
 
     - name: Clean up
       run: |
@@ -109,13 +111,13 @@ jobs:
     - name: Zip the EFI directory
       run: |
         echo "Zipping the EFI directory..."
-        zip -r Thinkpad_X1Tablet_3Gen.zip EFI
+        zip -r EFI.zip EFI
 
     - name: Upload EFI artifact
       uses: actions/upload-artifact@v4.4.3
       with:
         name: OpenCore-EFI
-        path: Thinkpad_X1Tablet_3Gen-macOS.zip
+        path: hp-DA1023nia-macOS.zip
     
     - name: Upload build
       uses: svenstaro/upload-release-action@2.9.0
@@ -124,7 +126,7 @@ jobs:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
          file: ./*.zip
          tag: ${{ github.ref }}
-         release_name: EFI Thinkpad_X1Tablet_3Gen
+         release_name: EFI hp-DA1023nia-macOS
          body: ${{ github.event_name != 'release' && github.event.head_commit.message || '' }}
          file_glob: true
-         overwrite: true
+         overwrite: true    
