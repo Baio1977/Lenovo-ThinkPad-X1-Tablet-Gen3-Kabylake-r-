@@ -9,7 +9,9 @@ on:
 jobs:
   download_opencore:
     runs-on: macos-latest
-
+    permissions:
+      contents: write
+      
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4.2.1
