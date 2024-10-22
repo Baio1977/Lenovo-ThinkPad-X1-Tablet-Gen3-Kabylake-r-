@@ -4,15 +4,14 @@ on:
   push:
     branches: 
       - main  # Change this to your default branch
-  workflow_dispatch:
-    
+
 jobs:
   download_opencore:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4.2.1
+      uses: actions/checkout@v2
 
     - name: Set up environment
       run: |
@@ -48,7 +47,7 @@ jobs:
 
     - name: Copy Kexts to EFI/OC/Kexts
       run: |
-        KEXT_SOURCE="./OC/Kexts"  # Adjust this as necessary
+        KEXT_SOURCE="./kext"  # Adjust this as necessary
         KEXT_TARGET="./EFI/OC/Kexts"
         mkdir -p "$KEXT_TARGET"
         if [ -d "$KEXT_SOURCE" ]; then
@@ -61,13 +60,13 @@ jobs:
     
     - name: Copy Resources to EFI/OC
       run: |
-        echo "Copying Resources to EFI/OC..."
-        cp -r ./OC/Resources ./EFI/OC/
+        echo "Copying Config.plist to EFI/OC..."
+        cp -r ./Resources ./EFI/OC/
         
     - name: Copy Config.plist to EFI/OC
       run: |
         echo "Copying Config.plist to EFI/OC..."
-        cp ./OC/Config.plist ./EFI/OC/
+        cp ./Config.plist ./EFI/OC/
 
     - name: Remove all files in EFI/OC/Tools
       run: |
@@ -76,10 +75,10 @@ jobs:
 
     - name: Remove unwanted drivers in EFI/OC/Drivers
       run: |
-        echo "Removing files in EFI/OC/Drivers except for AudioDxe.efi, OpenCanopy.efi, OpenRuntime.efi, ToggleSipEntry.efi, ResetNvramEntry.efi..."
+        echo "Removing files in EFI/OC/Drivers except for OpenCanopy.efi, OpenRuntime.efi, and ResetNvramEntry.efi..."
         cd ./EFI/OC/Drivers
         for file in *; do
-          if [[ "$file" != "AudioDxe.efi" && "$file" != "OpenCanopy.efi" && "$file" != "OpenRuntime.efi" && "$file" != "ToggleSipEntry.efi" && "$file" != "ResetNvramEntry.efi" ]]; then
+          if [[ "$file" != "OpenCanopy.efi" && "$file" != "OpenRuntime.efi" && "$file" != "ResetNvramEntry.efi" ]]; then
             rm -f "$file"
           fi
         done
@@ -88,12 +87,17 @@ jobs:
     - name: Copy HfsPlus.efi to EFI/OC/Drivers
       run: |
         echo "Copying HfsPlus.efi to EFI/OC/Drivers..."
-        cp ./OC/Drivers/HfsPlus.efi ./EFI/OC/Drivers/
+        cp ./HfsPlus.efi ./EFI/OC/Drivers/
 
-    - name: Copy SSDT-Thinkpad_X1Tablet_3Gen.aml to EFI/OC/ACPI
+    - name: Copy RU.efi to EFI/OC/Tools
       run: |
-        echo "Copying SSDT-Thinkpad_X1Tablet_3Gen.aml to EFI/OC/ACPI..."
-        cp ./OC/ACPI/SSDT-Thinkpad_X1Tablet_3Gen.aml ./EFI/OC/ACPI/
+        echo "Copying RU.efi to EFI/OC/Tools..."
+        cp ./RU.efi ./EFI/OC/Tools/
+
+    - name: Copy SSDT-HP_da1023nia.aml to EFI/OC/ACPI
+      run: |
+        echo "Copying SSDT-HP_da1023nia.aml to EFI/OC/ACPI..."
+        cp ./SSDT-HP_da1023nia.aml ./EFI/OC/ACPI/
 
     - name: Clean up
       run: |
@@ -112,10 +116,10 @@ jobs:
         zip -r EFI.zip EFI
 
     - name: Upload EFI artifact
-      uses: actions/upload-artifact@v4.4.3
+      uses: actions/upload-artifact@v3
       with:
         name: OpenCore-EFI
-        path: Lenovo-ThinkPad-X1-Tablet-Gen3-Kabylake-r-macOS.zip
+        path: hp-DA1023nia-macOS.zip
     
     - name: Upload build
       uses: svenstaro/upload-release-action@2.9.0
@@ -124,7 +128,7 @@ jobs:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
          file: ./*.zip
          tag: ${{ github.ref }}
-         release_name: EFI Lenovo-ThinkPad-X1-Tablet-Gen3-Kabylake-r-macOS
+         release_name: EFI hp-DA1023nia-macOS
          body: ${{ github.event_name != 'release' && github.event.head_commit.message || '' }}
          file_glob: true
          overwrite: true    
