@@ -117,7 +117,7 @@ jobs:
       uses: actions/upload-artifact@v4.4.3
       with:
         name: OpenCore-EFI
-        path: Lenovo_ThinkPad_X1_Tablet_3°Gen.zip  # Ensure this matches the output zip file name
+        path: EFI.zip  # Ensure this matches the output zip file name
     
     - name: Upload build
       uses: svenstaro/upload-release-action@2.9.0
