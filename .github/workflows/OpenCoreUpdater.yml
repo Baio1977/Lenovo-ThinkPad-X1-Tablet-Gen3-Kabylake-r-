@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   download_opencore:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
