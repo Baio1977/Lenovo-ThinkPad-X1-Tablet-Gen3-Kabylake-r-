@@ -111,7 +111,7 @@ jobs:
     - name: Zip the EFI directory
       run: |
         echo "Zipping the EFI directory..."
-        zip -r EFI.zip EFI
+        zip -r Lenovo_ThinkPad_X1_Tablet_3°Gen.zip EFI
 
     - name: Upload EFI artifact
       uses: actions/upload-artifact@v4.4.3
@@ -126,7 +126,7 @@ jobs:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
          file: ./EFI.zip  # Make sure the file path matches
          tag: ${{ github.ref }}
-         release_name: EFI Lenovo ThinkPad X1 Tablet 3°Gen
+         release_name: Lenovo ThinkPad X1 Tablet 3°Gen
          body: ${{ github.event_name != 'release' && github.event.head_commit.message || '' }}
          file_glob: true
          overwrite: true
