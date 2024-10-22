@@ -111,13 +111,13 @@ jobs:
     - name: Zip the EFI directory
       run: |
         echo "Zipping the EFI directory..."
-        zip -r EFI.zip EFI
+        zip -r Lenovo ThinkPad X1 Tablet 3°Gen.zip EFI
 
     - name: Upload EFI artifact
       uses: actions/upload-artifact@v4.4.3
       with:
         name: OpenCore-EFI
-        path: EFI.zip  # Ensure this matches the output zip file name
+        path: Lenovo ThinkPad X1 Tablet 3°Gen.zip  # Ensure this matches the output zip file name
     
     - name: Upload build
       uses: svenstaro/upload-release-action@2.9.0
