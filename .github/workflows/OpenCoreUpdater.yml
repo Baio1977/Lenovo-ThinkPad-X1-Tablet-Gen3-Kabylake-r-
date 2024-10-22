@@ -126,7 +126,7 @@ jobs:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
          file: ./EFI.zip  # Make sure the file path matches
          tag: ${{ github.ref }}
-         release_name: EFI
+         release_name: EFI Lenovo ThinkPad X1 Tablet 3°Gen
          body: ${{ github.event_name != 'release' && github.event.head_commit.message || '' }}
          file_glob: true
          overwrite: true
