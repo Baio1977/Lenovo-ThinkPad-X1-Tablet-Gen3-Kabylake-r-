@@ -116,7 +116,7 @@ jobs:
     - name: Upload EFI artifact
       uses: actions/upload-artifact@v4.4.3
       with:
-        name: Lenovo_ThinkPad_X1_Tablet_3°Gen
+        name: Lenovo_ThinkPad_X1_Tablet_3°Gen.zip
         path: Lenovo_ThinkPad_X1_Tablet_3°Gen.zip  # Ensure this matches the output zip file name
     
     - name: Upload build
