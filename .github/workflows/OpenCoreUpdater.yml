@@ -78,10 +78,10 @@ jobs:
 
     - name: Remove unwanted drivers in EFI/OC/Drivers
       run: |
-        echo "Removing files in EFI/OC/Drivers except for OpenCanopy.efi, OpenRuntime.efi, and ResetNvramEntry.efi..."
+        echo "Removing files in EFI/OC/Drivers except for OpenCanopy.efi, OpenRuntime.efi, ResetNvramEntry.efi,and ToggleSipEntry.efi..."
         cd ./EFI/OC/Drivers
         for file in *; do
-          if [[ "$file" != "OpenCanopy.efi" && "$file" != "OpenRuntime.efi" && "$file" != "ResetNvramEntry.efi" ]]; then
+          if [[ "$file" != "OpenCanopy.efi" && "$file" != "OpenRuntime.efi" && "$file" != "ResetNvramEntry.efi" && "$file" != "ToggleSipEntry.efi"]]; then
             rm -f "$file"
           fi
         done
