@@ -117,16 +117,16 @@ jobs:
       uses: actions/upload-artifact@v4.4.3
       with:
         name: OpenCore-EFI
-        path: Lenovo ThinkPad X1 Tablet 3°Gen.zip  # Ensure this matches the output zip file name
+        path: Lenovo_ThinkPad_X1_Tablet_3°Gen.zip  # Ensure this matches the output zip file name
     
     - name: Upload build
       uses: svenstaro/upload-release-action@2.9.0
       if: github.event_name != 'pull_request'
       with:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
-         file: ./Lenovo_ThinkPad_X1_Tablet_3Gen.zip  # Make sure the file path matches
+         file: ./EFI.zip  # Make sure the file path matches
          tag: ${{ github.ref }}
-         release_name: Lenovo_ThinkPad_X1_Tablet_3°Gen
+         release_name: EFI
          body: ${{ github.event_name != 'release' && github.event.head_commit.message || '' }}
          file_glob: true
          overwrite: true
