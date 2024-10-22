@@ -116,8 +116,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4.4.3
       with:
-        name: Lenovo_ThinkPad_X1_Tablet_3°Gen
-        path: Lenovo_ThinkPad_X1_Tablet_3°Gen.zip  # Ensure this matches the output zip file name
+        name: HP-630-CPU-Arrandale
+        path: HP-630-CPU-Arrandale.zip  # Ensure this matches the output zip file name
     
     - name: Upload build
       uses: svenstaro/upload-release-action@2.9.0
