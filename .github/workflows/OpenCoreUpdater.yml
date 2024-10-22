@@ -47,7 +47,7 @@ jobs:
 
     - name: Copy Kexts to EFI/OC/Kexts
       run: |
-        KEXT_SOURCE=".OC/kext"  # Adjust this as necessary
+        KEXT_SOURCE="./OC/Kexts"  # Adjust this as necessary
         KEXT_TARGET="./EFI/OC/Kexts"
         mkdir -p "$KEXT_TARGET"
         if [ -d "$KEXT_SOURCE" ]; then
@@ -60,7 +60,7 @@ jobs:
     
     - name: Copy Resources to EFI/OC
       run: |
-        echo "Copying Config.plist to EFI/OC..."
+        echo "Copying Resources to EFI/OC..."
         cp -r ./OC/Resources ./EFI/OC/
         
     - name: Copy Config.plist to EFI/OC
