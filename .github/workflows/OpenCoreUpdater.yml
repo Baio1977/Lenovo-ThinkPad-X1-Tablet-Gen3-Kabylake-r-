@@ -47,7 +47,7 @@ jobs:
 
     - name: Copy Kexts to EFI/OC/Kexts
       run: |
-        KEXT_SOURCE="./kext"  # Adjust this as necessary
+        KEXT_SOURCE=".OC/kext"  # Adjust this as necessary
         KEXT_TARGET="./EFI/OC/Kexts"
         mkdir -p "$KEXT_TARGET"
         if [ -d "$KEXT_SOURCE" ]; then
@@ -61,12 +61,12 @@ jobs:
     - name: Copy Resources to EFI/OC
       run: |
         echo "Copying Config.plist to EFI/OC..."
-        cp -r ./Resources ./EFI/OC/
+        cp -r ./OC/Resources ./EFI/OC/
         
     - name: Copy Config.plist to EFI/OC
       run: |
         echo "Copying Config.plist to EFI/OC..."
-        cp ./Config.plist ./EFI/OC/
+        cp ./OC/Config.plist ./EFI/OC/
 
     - name: Remove all files in EFI/OC/Tools
       run: |
@@ -87,17 +87,12 @@ jobs:
     - name: Copy HfsPlus.efi to EFI/OC/Drivers
       run: |
         echo "Copying HfsPlus.efi to EFI/OC/Drivers..."
-        cp ./HfsPlus.efi ./EFI/OC/Drivers/
+        cp ./OC/Drivers/HfsPlus.efi ./EFI/OC/Drivers/
 
-    - name: Copy RU.efi to EFI/OC/Tools
+    - name: Copy SSDT-Thinkpad_X1Tablet_3Gen.aml to EFI/OC/ACPI
       run: |
-        echo "Copying RU.efi to EFI/OC/Tools..."
-        cp ./RU.efi ./EFI/OC/Tools/
-
-    - name: Copy SSDT-HP_da1023nia.aml to EFI/OC/ACPI
-      run: |
-        echo "Copying SSDT-HP_da1023nia.aml to EFI/OC/ACPI..."
-        cp ./SSDT-HP_da1023nia.aml ./EFI/OC/ACPI/
+        echo "Copying SSDT-Thinkpad_X1Tablet_3Gen.aml to EFI/OC/ACPI..."
+        cp ./OC/ACPI/SSDT-Thinkpad_X1Tablet_3Gen.aml ./EFI/OC/ACPI/
 
     - name: Clean up
       run: |
@@ -119,7 +114,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: OpenCore-EFI
-        path: hp-DA1023nia-macOS.zip
+        path: Lenovo ThinkPad X1 Tablet 3°Gen.zip
     
     - name: Upload build
       uses: svenstaro/upload-release-action@2.9.0
@@ -128,7 +123,7 @@ jobs:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
          file: ./*.zip
          tag: ${{ github.ref }}
-         release_name: EFI hp-DA1023nia-macOS
+         release_name: EFI Lenovo ThinkPad X1 Tablet 3°Gen
          body: ${{ github.event_name != 'release' && github.event.head_commit.message || '' }}
          file_glob: true
          overwrite: true    
