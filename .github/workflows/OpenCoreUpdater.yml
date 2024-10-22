@@ -113,7 +113,7 @@ jobs:
         echo "Zipping the EFI directory..."
         zip -r EFI.zip EFI
 
-    - name: Upload Lenovo_ThinkPad_X1_Tablet_3°Gen artifact
+    - name: Upload artifact
       uses: actions/upload-artifact@v4.4.3
       with:
         name: Lenovo_ThinkPad_X1_Tablet_3°Gen
