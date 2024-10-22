@@ -5,6 +5,9 @@ on:
     branches: 
       - main  # Change this to your default branch
 
+permissions:
+  contents: write  # Grant write permissions for uploading releases
+
 jobs:
   download_opencore:
     runs-on: ubuntu-latest
@@ -114,16 +117,16 @@ jobs:
       uses: actions/upload-artifact@v4.4.3
       with:
         name: OpenCore-EFI
-        path: Lenovo ThinkPad X1 Tablet 3°Gen.zip
+        path: EFI.zip  # Ensure this matches the output zip file name
     
     - name: Upload build
       uses: svenstaro/upload-release-action@2.9.0
       if: github.event_name != 'pull_request'
       with:
          repo_token: ${{ secrets.GITHUB_TOKEN }}
-         file: ./*.zip
+         file: ./EFI.zip  # Make sure the file path matches
          tag: ${{ github.ref }}
          release_name: EFI Lenovo ThinkPad X1 Tablet 3°Gen
          body: ${{ github.event_name != 'release' && github.event.head_commit.message || '' }}
          file_glob: true
-         overwrite: true    
+         overwrite: true
