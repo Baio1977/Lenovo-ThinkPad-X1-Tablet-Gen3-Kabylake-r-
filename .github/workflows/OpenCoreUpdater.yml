@@ -75,13 +75,13 @@ jobs:
       run: |
         echo "Removing all files in EFI/OC/Tools..."
         rm -rf ./EFI/OC/Tools/*
-
+        
     - name: Remove unwanted drivers in EFI/OC/Drivers
       run: |
-        echo "Removing files in EFI/OC/Drivers except for OpenCanopy.efi, OpenRuntime.efi, ResetNvramEntry.efi,and ToggleSipEntry.efi..."
+        echo "Removing files in EFI/OC/Drivers except for AudioDxe.efi, OpenCanopy.efi, OpenRuntime.efi, ToggleSipEntry.efi, ResetNvramEntry.efi..."
         cd ./EFI/OC/Drivers
         for file in *; do
-          if [[ "$file" != "OpenCanopy.efi" && "$file" != "OpenRuntime.efi" && "$file" != "ResetNvramEntry.efi" && "$file" != "ToggleSipEntry.efi"]]; then
+          if [[ "$file" != "AudioDxe.efi" && "$file" != "OpenCanopy.efi" && "$file" != "OpenRuntime.efi" && "$file" != "ToggleSipEntry.efi" && "$file" != "ResetNvramEntry.efi" ]]; then
             rm -f "$file"
           fi
         done
